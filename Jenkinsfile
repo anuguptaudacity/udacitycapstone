@@ -6,7 +6,7 @@ pipeline {
 			steps {
 				sh 'tidy -q -e *.html'
 			}
-		}$class: 'AmazonWebServicesCredentialsBinding'
+		}
 		
 		stage('Build Docker Image') {
 			steps {
