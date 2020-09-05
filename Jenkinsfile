@@ -10,7 +10,7 @@ pipeline {
 		
 		stage('Build Docker Image') {
 			steps {
-				withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'udacity_capstone', usernameVariable: 'anuguptaudacity', passwordVariable: 'udacity@anu1']]){
+				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
 						docker build -t anuguptaudacity/capstone .
 					'''
@@ -20,9 +20,9 @@ pipeline {
 
 		stage('Push Image To Dockerhub') {
 			steps {
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'udacity_capstone', usernameVariable: 'anuguptaudacity', passwordVariable: 'udacity@anu1']]){
+				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD']]){
 					sh '''
-						docker login -u anuguptaudacity -p udacity@anu1
+						docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 						docker push anuguptaudacity/capstone
 					'''
 				}
