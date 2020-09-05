@@ -6,11 +6,11 @@ pipeline {
 			steps {
 				sh 'tidy -q -e *.html'
 			}
-		}
+		}$class: 'AmazonWebServicesCredentialsBinding'
 		
 		stage('Build Docker Image') {
 			steps {
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'udacity_capstone', usernameVariable: 'anuguptaudacity', passwordVariable: 'udacity@anu1']]){
+				withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'udacity_capstone', usernameVariable: 'anuguptaudacity', passwordVariable: 'udacity@anu1']]){
 					sh '''
 						docker build -t anuguptaudacity/capstone .
 					'''
