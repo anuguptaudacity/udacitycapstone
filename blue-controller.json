@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"blue",
-                  "image":"anuguptaudacity/udacity@anu1",
+                  "image":"anuguptaudacity/capstone",
                   "ports":[
                      {
                         "name":"http-server",
